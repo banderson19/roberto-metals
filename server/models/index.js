@@ -1,4 +1,4 @@
 const Client = require('./Client');
-const Tracker = require('./Tracker')
+const Ticket = require('./Ticket')
 
-module.exports = { Client, Tracker };
+module.exports = { Client, Ticket };

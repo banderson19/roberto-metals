@@ -6,7 +6,7 @@ const materialSchema = new Schema(
       type: String,
       maxlength: 180
     },
-    quanity: {
+    quantity: {
       type: Number,
       required: true
     }
