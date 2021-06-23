@@ -1,7 +1,10 @@
+// const { UserInputError } = require("apollo-server-express");
+const { Client } = require('../models')
+
 const resolvers = {
     Query: {
-      helloWorld: () => {
-        return 'Hello world!';
+      clients: async () => {
+        return Client.find().sort({ createdAt: -1 });
       }
     }
   };
