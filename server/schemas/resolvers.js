@@ -67,6 +67,34 @@ const resolvers = {
         const client = await Client.create(args);
 
         return client;
+      },
+      // adds ticket to 
+      addTicket: async (parent, args, context) => {
+        if (context.user) {
+          const ticket = await Ticket.create({ ...args, userName: context.user.userName});
+
+          await Ticket.findOneAndUpdate(
+            {_id:context.user._id},
+            { $push: { tickets: ticket._id }},
+            { new: true }
+          );
+            
+          return ticket;
+        }
+        throw new AuthenticationError('You need to be logged in!')
+      },
+      addMaterial: async (parent, { ticketId, materialName, quantity }, context) => {
+        if (context.user) {
+          console.log(context.user)
+          const updatedTicket = await Ticket.findOneAndUpdate(
+            { _id: ticketId },
+            { $push: { materials: { materialName, quantity } } },
+            { new: true, runValidators: true }
+          );
+          console.log(materialName, quantity)
+          return updatedTicket;
+        }
+        throw new AuthenticationError('You need to be logged in!')
       }
     }
   };

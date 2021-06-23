@@ -41,6 +41,8 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(userName: String!, email: String!, password: String!): Auth
     addClient(clientName: String!): Client
+    addTicket(clientName: String!): Ticket
+    addMaterial(ticketId: ID!, materialName: String!, quantity: Int!): Ticket
 }
 
 `;
