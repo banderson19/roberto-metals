@@ -1,21 +1,21 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Client, Ticket } = require('../models')
-
+const { Client, Ticket, User} = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-      // me: async (parent, args, context) => {
-      //   if (context.user) {
-      //     const userData = await User.findOne({ _id: context.user._id })
-      //       .select('-__v -password')
-      //       .populate('thoughts')
-      //       .populate('friends');
+      me: async (parent, args, context) => {
+        if (context.user) {
+          const userData = await User.findOne({ _id: context.user._id })
+            .select('-__v -password')
+            .populate('thoughts')
+            .populate('friends');
       
-      //     return userData;
-      //   }
+          return userData;
+        }
       
-      //   throw new AuthenticationError('Not logged in');
-      // },
+        throw new AuthenticationError('Not logged in');
+      },
       // get all clients
       clients: async () => {
         return Client.find()
@@ -36,24 +36,32 @@ const resolvers = {
       }
     },
     Mutation: {
-      // addUser: async(parent, args) => {
-      //   const user = await User.create(args);
+      addUser: async(parent, args) => {
+        const user = await User.create(args);
+        const token = signToken(user);
 
-      //   return user;
-      // },
-      // login: async(parent, { email, password }) => {
-      //   const user = await User.findOne({ email });
+        return { token, user};
+      },
+      login: async(parent, { email, password }) => {
+        const user = await User.findOne({ email });
 
-      //   if (!user) {
-      //     throw new AuthenticationError('Incorrect username');
-      //   }
-      //   const correctPw = await user.isCorrectPassword(password);
+        if (!user) {
+          throw new AuthenticationError('Incorrect username');
+        } 
+        // console.log(password)
+        // const correctPw = await user.methods.isCorrectPassword(password);
 
-      //   if(!correctPw) {
-      //     throw new AuthenticationError('Incorrect password');
-      //   }
-      //   return user;
-      // },
+        // if(!correctPw) {
+        //   throw new AuthenticationError('Incorrect password');
+        // }
+
+        // ***** fix bug here **** 
+        if(!password) {
+          throw new AuthenticationError('Incorrect password');
+        }
+        const token = signToken(user);
+        return { token, user };
+      },
 
       addClient: async (parent, args) => {
         const client = await Client.create(args);
