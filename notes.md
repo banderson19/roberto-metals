@@ -1,22 +1,17 @@
-Database: 
+### Feature
+add material count on ticket
 
-Customer		Metal		Ticket number 		material_purchased		Scrap yard Inventory		Mills
-Company name		Metal_id		id		ticket number		material_id		mill_id
-Phone Number		Material		date		material_id		quantity		mill_name
-Address				customer_id		quantity				
-				special notes		purchase price				
 
-??create mongoose connection with mongo??
-const mongoose = require('mongoose');
+### To do
+* login and authentication - 21.2.3
+* Authorize Users with JWTs - 21.2.4 - .5
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
-  {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-  }
-);
+## BUGS to FIX
+* user password function(isCorrectPassword)
 
-module.exports = mongoose.connection;
+
+
+## 2.0
+* allow clients to login in with their own id to see previous pickups and the material we picked up and paid for
+
+
