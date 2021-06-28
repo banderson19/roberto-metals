@@ -13,5 +13,4 @@ add material count on ticket
 
 ## 2.0
 * allow clients to login in with their own id to see previous pickups and the material we picked up and paid for
-
-
+* restructure Client table: hold tickets array instead of tickets being the main table
