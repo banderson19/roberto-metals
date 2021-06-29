@@ -16,6 +16,10 @@ const resolvers = {
       
         throw new AuthenticationError('Not logged in');
       },
+      users: async () => {
+        return User.find()
+          .populate('users')
+      },
       // get all clients
       clients: async () => {
         return Client.find()
@@ -36,11 +40,10 @@ const resolvers = {
       }
     },
     Mutation: {
-      addUser: async(parent, args) => {
+      addUser: async (parent, args) => {
         const user = await User.create(args);
-        const token = signToken(user);
-
-        return { token, user};
+      
+        return user;
       },
       login: async(parent, { email, password }) => {
         const user = await User.findOne({ email });
@@ -70,8 +73,9 @@ const resolvers = {
       },
       // adds ticket to 
       addTicket: async (parent, args, context) => {
+        console.log(context.user)
         if (context.user) {
-          const ticket = await Ticket.create({ ...args, userName: context.user.userName});
+          const ticket = await Ticket.create({ ...args, username: context.user.username});
 
           await Ticket.findOneAndUpdate(
             {_id:context.user._id},
@@ -94,7 +98,7 @@ const resolvers = {
           console.log(materialName, quantity)
           return updatedTicket;
         }
-        throw new AuthenticationError('You need to be logged in!')
+        // throw new AuthenticationError('You need to be logged in!')
       }
     }
   };
