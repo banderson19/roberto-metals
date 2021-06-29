@@ -1,15 +1,66 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import TicketModal from '../TicketModal';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+Modal.setAppElement('#root');
 
 const TicketList = ( { tickets, title }) => {
+    // let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    
     if (!tickets.length) {
         return <h3> No tickets yet </h3>
     }
     console.log(1111, tickets)
+
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+//   function afterOpenModal() {
+//     // references are now sync'd and can be accessed.
+//     subtitle.style.color = '#f00';
+//   }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
     return (
         <div>
-            <div>{title} </div>
+            <div>
+                {title}
+            </div>
+            <div>
+                <button onClick={openModal}>Add Ticket</button>
+                <Modal
+                    isOpen={modalIsOpen}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div>
+                    <button onClick={closeModal}>close</button>
+
+                    <TicketModal/>
+
+                    </div>
+                </Modal>
+                </div>
             <div className="flex-row justify-center">
                 {tickets && 
                     tickets.map(ticket => (
