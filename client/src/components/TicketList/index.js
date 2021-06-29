@@ -10,31 +10,33 @@ const TicketList = ( { tickets, title }) => {
     return (
         <div>
             <div>{title} </div>
-            {tickets && 
-                tickets.map(ticket => (
-                    <div key={ticket._id} className = "card mb-3">
-                        <h5 className="card-header">
-                            <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light">
-                                Client: {ticket.clientName}
-                            </Link>
-                            <br></br>
-                            <Link to={`/ticket/${ticket._id}`}style= {{ fontWeight: 700 }} className="text-light">
-                                Ticket Number: {ticket._id}
-                            </Link>
-                        </h5>
-                        <div className="card-body">
-                            {  ticket.materials.map(material => (
-                                
-                                    <div key={material._id} className = "card mb-0">
-                                        <p>{material.materialName}</p>
-                                        <p>{material.quantity}</p>
-                                    </div>
-                                ))
-                            }
+            <div className="flex-row justify-center">
+                {tickets && 
+                    tickets.map(ticket => (
+                        <div key={ticket._id} className = "card mb-3 col-4">
+                            <h5 className="card-header">
+                                <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light">
+                                    Client: {ticket.clientName}
+                                </Link>
+                                <br></br>
+                                <Link to={`/ticket/${ticket._id}`}style= {{ fontWeight: 700 }} className="text-light">
+                                    Ticket Number: {ticket._id}
+                                </Link>
+                            </h5>
+                            <div className="card-body">
+                                {  ticket.materials.map(material => (
+                                    
+                                        <div key={material._id} className = "card mb-0 pl-2">
+                                            <p>Material: {material.materialName}</p>
+                                            <p>Weight: {material.quantity} lbs</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
     )
 }
