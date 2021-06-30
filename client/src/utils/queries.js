@@ -5,6 +5,7 @@ export const QUERY_TICKETS = gql `
         tickets(clientName: $clientName) {
             _id
             clientName
+            pickupDate
             materials {
                 _id
                 materialName
@@ -19,6 +20,7 @@ export const QUERY_TICKET = gql`
     ticket(_id: $id) {
       _id
       clientName
+      pickupDate
       materials {
         _id
         materialName

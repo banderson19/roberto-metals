@@ -66,15 +66,23 @@ const TicketList = ( { tickets, title }) => {
                 {tickets && 
                     tickets.map(ticket => (
                         <div key={ticket._id} className = "card mb-3 col-4">
-                            <h5 className="card-header">
-                                <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light">
-                                    Client: {ticket.clientName}
-                                </Link>
-                                <br></br>
-                                <Link to={`/ticket/${ticket._id}`}style= {{ fontWeight: 700 }} className="text-light">
-                                    Ticket Number: {ticket._id}
-                                </Link>
-                            </h5>
+                            <div  className="card-header">
+                                <h3>
+                                    <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light">
+                                        Client: {ticket.clientName}
+                                    </Link>
+                                    <br></br>
+                                </h3>
+
+                                <h4>
+                                    Pickup Date: {ticket.pickupDate}
+                                </h4>
+                                <h6>
+                                    <Link to={`/ticket/${ticket._id}`}style= {{ fontWeight: 700 }} className="text-light">
+                                        Ticket Number: {ticket._id}
+                                    </Link>
+                                </h6>
+                            </div>
                             <div className="card-body">
                                 {  ticket.materials.map(material => (
                                     

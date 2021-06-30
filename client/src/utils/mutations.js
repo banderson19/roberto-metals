@@ -29,6 +29,7 @@ export const ADD_TICKET = gql`
         addTicket(clientName: $clientName) {
             _id
             clientName
+            pickupDate
             materials {
                 _id
                 materialName

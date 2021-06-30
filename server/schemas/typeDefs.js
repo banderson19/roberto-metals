@@ -16,6 +16,7 @@ type Client {
 type Ticket {
     _id: ID
     clientName: String
+    pickupDate: String
     materialCount: Int
     materials: [Material]
 }
