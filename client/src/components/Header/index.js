@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className="bg-secondary flex-row">
             
-            <div className="container flex-row justify-space-between jusitfy-center float-left">
+            <div className="rapid-green-color container flex-row justify-space-between jusitfy-center float-left">
                 <Link to="/">
                     <h1> Roberto Metals </h1>
                 </Link>

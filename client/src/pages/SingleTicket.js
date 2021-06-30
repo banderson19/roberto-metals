@@ -21,11 +21,19 @@ const SingleTicket = props => {
     return (
     <div>
       <div className="card mb-3">
-        <p className="card-header">
+        <div className=" flex-row justify-space-between card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
-            {ticket.clientName}
+            <h3> {ticket.clientName} </h3>
           </span>{' '}
-        </p>
+          <div className="flex-row">
+            <div> 
+              <h6>Edit</h6>
+            </div>
+            <div className="pl-3">
+              <h6>Add Material</h6>
+            </div>
+          </div>
+        </div>
         <div className="card-body">
             {  ticket.materials.map(material => (                     
                     <div key={material._id} className = "card mb-0">

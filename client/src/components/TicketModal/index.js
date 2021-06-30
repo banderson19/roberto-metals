@@ -1,26 +1,43 @@
 import React, {useState} from 'react';
 
 import { useMutation } from '@apollo/client';
-import { ADD_TICKET } from '../../utils/mutations';
+import { ADD_TICKET , ADD_MATERIAL, ADD_TICKET_AND_MATERIAL} from '../../utils/mutations';
 
 const TicketModal = () => {
 
-    const [clientName, setText] = useState('');
+    // option to add client name in form than material later
+    // const [clientName, setText] = useState('');
+    // setText(event.target.value)
 
-    const [addTicket, {error}] = useMutation(ADD_TICKET);
+    const [formState, setFormState] = useState({clientName: '', materialName: '', quantity: ''});
+    
+    const [addTicket] = useMutation(ADD_TICKET);
+    const [addMaterial] = useMutation(ADD_MATERIAL)
 
     const handleChange = event => {
-        setText(event.target.value)
+        const {name, value} = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value
+        })
     }
     const handleFormSubmit = async event => {
         event.preventDefault();
-
+    
         try {
             // add ticket to database
-            await addTicket ({
-                variables: { clientName } 
-            })
+            let {data} = await addTicket ({
+                variables: { ...formState }  
+            }).then( {data} ,
+                addMaterial({
+                    
+                    variables: { ...formState} 
+                })
+            )
+            console.log(data)
         } catch (e) {
+            console.log('errrrg')
             console.error(e);
         }
     }
@@ -33,11 +50,35 @@ const TicketModal = () => {
             >
                 <input 
                     placeholder="Client Name" 
-                    value={clientName} 
+                    value={formState.clientName} 
                     className=""
+                    name="clientName"
+                    type="clientName"
+                    id="clientName"
                     onChange={handleChange}
                 >
                 </input>
+                <input 
+                    placeholder="Metal" 
+                    value={formState.materialName} 
+                    className=""
+                    name="materialName"
+                    type="materialName"
+                    id="materialName"
+                    onChange={handleChange}
+                >
+                </input>
+                <input 
+                    placeholder="Quantity" 
+                    value={formState.quantity} 
+                    className=""
+                    name="quantity"
+                    type="quantity"
+                    id="quantity"
+                    onChange={handleChange}
+                >
+                </input>
+                
                 
                 <button className="" type="submit">Add Ticket</button>
             </form> 

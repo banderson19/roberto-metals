@@ -21,19 +21,21 @@ const Login = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await login({
-        variables: { ...formState }
-      });
-      
+        const { data } = await login({
+            variables: { ...formState }
+        });
+        
+        
       Auth.login(data.login.token);
-      console.log(data);
+      console.log('data', data);
     } catch (e) {
+        console.log('errrror')
       console.error(e);
     }
     // clear form values
     setFormState({
-      email: '',
-      password: '',
+      email: 'test2@test.com',
+      password: 'test12345',
     });
   };
 

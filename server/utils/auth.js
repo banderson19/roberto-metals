@@ -25,16 +25,18 @@ authMiddleware: function({ req }) {
       // decode and attach user data to request object
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
+      console.log('valid token')
     } catch {
       console.log('Invalid token');
     }
   
     // return updated request object
+    
     return req;
   },
 
-  signToken: function({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signToken: function({ userName, email, _id }) {
+    const payload = { userName, email, _id };
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   }

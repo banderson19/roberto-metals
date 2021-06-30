@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Client, Ticket, User} = require('../models');
+const { Client, Ticket, User, Material} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -42,8 +42,9 @@ const resolvers = {
     Mutation: {
       addUser: async (parent, args) => {
         const user = await User.create(args);
-      
-        return user;
+        const token = signToken(user);
+
+        return { token, user };
       },
       login: async(parent, { email, password }) => {
         const user = await User.findOne({ email });
@@ -73,23 +74,24 @@ const resolvers = {
       },
       // adds ticket to 
       addTicket: async (parent, args, context) => {
-        console.log(context.user)
-        if (context.user) {
-          const ticket = await Ticket.create({ ...args, username: context.user.username});
-
-          await Ticket.findOneAndUpdate(
-            {_id:context.user._id},
-            { $push: { tickets: ticket._id }},
-            { new: true }
-          );
+        // console.log(context.user)
+        // if (context.user) {
+          // const ticket = await Ticket.create({ ...args, userName: context.user.userName});
+          const ticket = await Ticket.create({ ...args});
+          console.log(args)
+          // console.log('context', context.user)
+          // await Ticket.findOneAndUpdate(
+          //   {_id: ticket._id},
+          //   { $push: { tickets: ticket._id }},
+          //   { new: true }
+          // );
             
           return ticket;
-        }
-        throw new AuthenticationError('You need to be logged in!')
+        // }
+
+        // throw new AuthenticationError('You need to be logged in!')
       },
-      addMaterial: async (parent, { ticketId, materialName, quantity }, context) => {
-        if (context.user) {
-          console.log(context.user)
+      addMaterial: async (parent, { ticketId, materialName, quantity }) => {
           const updatedTicket = await Ticket.findOneAndUpdate(
             { _id: ticketId },
             { $push: { materials: { materialName, quantity } } },
@@ -97,9 +99,21 @@ const resolvers = {
           );
           console.log(materialName, quantity)
           return updatedTicket;
-        }
+        
         // throw new AuthenticationError('You need to be logged in!')
       }
+    //   addTicketAndMaterial: async (parent, {clientName, ticketId, materialName, quantity }) => {
+    //     const wholeTicket = await Ticket.create ({ clientName });
+    //     console.log('client', clientName)
+
+    //     await Material.findOneAndUpdate (
+    //       {_id: ticketId},
+    //       {$push: { materials: { materialName, quantity } } },
+    //       { new: true, runValidators: true }
+    //     );
+    //     console.log('other data', materialName, quantity) 
+    //     return wholeTicket;
+    //   }
     }
   };
   

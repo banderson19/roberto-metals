@@ -19,7 +19,6 @@ export const ADD_USER = gql`
       user {
         _id
         username
-        email
       }
     }
   }
@@ -38,3 +37,30 @@ export const ADD_TICKET = gql`
         }
     }
 `;
+
+export const ADD_MATERIAL = gql `
+mutation addMaterial($ticketId: ID!, $materialName: String!, $quantity: Int!) {
+  addMaterial(ticketId: $ticketId, materialName: $materialName, quantity: $quantity) {
+    _id
+    materials {
+      _id
+      materialName
+      quantity
+    }
+  }
+}
+`;
+
+// export const ADD_TICKET_AND_MATERIAL = gql `
+// mutation addTicketAndMaterial($clientName: String!, $ticketId: ID, $materialName: String!, $quantity: Int!) {
+//   addTicketAndMaterial(clientName: $clientName, ticketId: $ticketId, materialName: $materialName, quantity: $quantity) {
+//     _id
+//     clientName
+//     materials {
+//       _id
+//       materialName
+//       quantity
+//     }
+//   }
+// }
+// `

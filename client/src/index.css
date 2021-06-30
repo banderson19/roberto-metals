@@ -1,6 +1,6 @@
 :root {
-  --primary: #497573;
-  --secondary: #99f7f2;
+  --primary: #274228;
+  --secondary: #276575;
   --tertiary: #b2c2c1;
   --quatrinary: #cadbda;
   --light: #e1f5f4;
@@ -17,7 +17,9 @@
 * {
   box-sizing: border-box;
 }
-
+.rapid-green-color {
+  color: #8cc63f
+}
 html,
 body {
   min-height: 100%;
@@ -169,8 +171,9 @@ nav a:hover {
 }
 
 .card-header {
-  color: var(--secondary);
+  color: #8cc63f;
   margin: 0;
+  width: 100%;
   background-color: var(--dark);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;

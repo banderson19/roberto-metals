@@ -78,7 +78,7 @@ const TicketList = ( { tickets, title }) => {
                             <div className="card-body">
                                 {  ticket.materials.map(material => (
                                     
-                                        <div key={material._id} className = "card mb-0 pl-2">
+                                        <div key={material._id} className = "flex-row card mb-auto pl-2">
                                             <p>Material: {material.materialName}</p>
                                             <p>Weight: {material.quantity} lbs</p>
                                         </div>

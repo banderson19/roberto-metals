@@ -2,10 +2,11 @@
 const { gql } = require('apollo-server-express');
 
 // create our typeDefs
-const typeDefs = gql`  
+const typeDefs = gql` 
+
 type User {
     _id: ID
-    username: String
+    userName: String
     email: String
 }
 type Client {
@@ -38,8 +39,8 @@ type Query {
 }
 
 type Mutation {
-    login(email: String!, password: String!): User
-    addUser(username: String!, email: String!, password: String!): User
+    login(email: String!, password: String!): Auth
+    addUser(userName: String!, email: String!, password: String!): Auth
     addClient(clientName: String!): Client
     addTicket(clientName: String!): Ticket
     addMaterial(ticketId: ID!, materialName: String!, quantity: Int!): Ticket
@@ -49,3 +50,4 @@ type Mutation {
 
 // export the typeDefs
 module.exports = typeDefs;
+// addTicketAndMaterial(clientName: String!, ticketId: ID!, materialName: String!, quantity: Int! ): Ticket
