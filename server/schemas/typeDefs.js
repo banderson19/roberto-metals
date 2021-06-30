@@ -37,6 +37,7 @@ type Query {
     client(clientName: String!): Client
     tickets(clientName: String): [Ticket]
     ticket(_id: ID!): Ticket
+    material(_id: ID!): Material
 }
 
 type Mutation {
@@ -45,6 +46,7 @@ type Mutation {
     addClient(clientName: String!): Client
     addTicket(clientName: String!): Ticket
     addMaterial(ticketId: ID!, materialName: String!, quantity: Int!): Ticket
+    deleteMaterial(materialId: ID!): Material
 }
 
 `;

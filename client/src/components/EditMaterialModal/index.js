@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 
-import { useMutation } from '@apollo/client';
-import { ADD_TICKET } from '../../utils/mutations';
+// import { useMutation } from '@apollo/client';
+// import { ADD_TICKET } from '../../utils/mutations';
+import { useQuery } from '@apollo/client';
+import { QUERY_TICKET } from '../../utils/queries';
 
-const TicketModal = () => {
+const EditTicketModal = () => {
 
     // option to add client name in form than material later
     const [clientName, setText] = useState('');
     
-    const [addTicket] = useMutation(ADD_TICKET);
+    // const [addTicket] =  (ADD_TICKET);
+    // const { loading, data } = useQuery(QUERY_TICKET, {
+    //     variables: { id: ticketID }
+    //   });
+    //   const ticket = data?.ticket || {};
+    //   console.log(333, data)
 
     const handleChange = event => {
         setText(event.target.value);
@@ -16,16 +23,16 @@ const TicketModal = () => {
     const handleFormSubmit = async event => {
         event.preventDefault();
     
-        try {
-            // add ticket to database
-            await addTicket ({
-                variables: { clientName }  
-            })
-            console.log('added new ticket')
-        } catch (e) {
-            console.log('errrrg')
-            console.error(e);
-        }
+        // try {
+        //     // add ticket to database
+        //     await addTicket ({
+        //         variables: { clientName }  
+        //     })
+        //     console.log('added new ticket')
+        // } catch (e) {
+        //     console.log('errrrg')
+        //     console.error(e);
+        // }
     }
 
     return (
@@ -48,5 +55,5 @@ const TicketModal = () => {
     );
 };
 
-export default TicketModal;
+export default EditTicketModal;
 

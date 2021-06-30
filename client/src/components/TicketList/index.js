@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import TicketModal from '../TicketModal';
@@ -78,7 +78,7 @@ const TicketList = ( { tickets, title }) => {
                                     Pickup Date: {ticket.pickupDate}
                                 </h4>
                                 <h6>
-                                    <Link to={`/ticket/${ticket._id}`}style= {{ fontWeight: 700 }} className="text-light">
+                                    <Link to={`/ticket/${ticket._id}`} style={{ fontWeight: 700 }} className="text-light">
                                         Ticket Number: {ticket._id}
                                     </Link>
                                 </h6>

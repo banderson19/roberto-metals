@@ -15,7 +15,7 @@ const Profile = props => {
   });
 
   const client = data?.client || {};
-  console.log(client)
+  console.log('client', client)
   if (loading) {
     return <div>Loading...</div>;
   }

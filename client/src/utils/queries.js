@@ -30,6 +30,16 @@ export const QUERY_TICKET = gql`
   }
 `;
 
+export const QUERY_MATERIAL = gql `
+  query materials($id: ID!) {
+    materials( _id: $id) {
+      _id
+      materialName
+      quantity
+    }
+  }
+`
+
 export const QUERY_CLIENT = gql`
   query client($clientName: String!) {
     client(clientName: $clientName) {

@@ -37,6 +37,9 @@ const resolvers = {
       },
       ticket: async (parent, { _id }) => {
         return Ticket.findOne({ _id });
+      },
+      material: async (parent, {_id}) => {
+        return Material.findOne({_id});
       }
     },
     Mutation: {
@@ -101,19 +104,14 @@ const resolvers = {
           return updatedTicket;
         
         // throw new AuthenticationError('You need to be logged in!')
-      }
-    //   addTicketAndMaterial: async (parent, {clientName, ticketId, materialName, quantity }) => {
-    //     const wholeTicket = await Ticket.create ({ clientName });
-    //     console.log('client', clientName)
-
-    //     await Material.findOneAndUpdate (
-    //       {_id: ticketId},
-    //       {$push: { materials: { materialName, quantity } } },
-    //       { new: true, runValidators: true }
-    //     );
-    //     console.log('other data', materialName, quantity) 
-    //     return wholeTicket;
-    //   }
+      },
+      deleteMaterial: async(parent, { materialId }) => {
+        const deletedMaterial = await Material.findByOneAndUpdate(
+          {_id: materialId}
+        )
+        console.log(_id)
+        return deletedMaterial;
+      } 
     }
   };
   
