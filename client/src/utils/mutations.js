@@ -53,9 +53,14 @@ mutation addMaterial($ticketId: ID!, $materialName: String!, $quantity: Int!) {
 `;
 
 export const DELETE_MATERIAL = gql `
-  mutation deleteMaterial($materialId: ID!) {
-    deleteMaterial(materialId: $materialId) {
-      _id
+  mutation deleteMaterial($ticketId: ID!, $materialId: ID!) {
+    deleteMaterial(ticketId: $ticketId, materialId: $materialId) {
+      _id 
+      materials {
+        _id
+        materialName
+        quantity
+      }
     }
   }
 `;

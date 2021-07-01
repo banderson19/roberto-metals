@@ -46,7 +46,7 @@ type Mutation {
     addClient(clientName: String!): Client
     addTicket(clientName: String!): Ticket
     addMaterial(ticketId: ID!, materialName: String!, quantity: Int!): Ticket
-    deleteMaterial(materialId: ID!): Material
+    deleteMaterial(ticketId: ID!, materialId: ID!): Ticket
 }
 
 `;

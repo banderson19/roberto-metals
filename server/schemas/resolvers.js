@@ -37,9 +37,6 @@ const resolvers = {
       },
       ticket: async (parent, { _id }) => {
         return Ticket.findOne({ _id });
-      },
-      material: async (parent, {_id}) => {
-        return Material.findOne({_id});
       }
     },
     Mutation: {
@@ -105,12 +102,15 @@ const resolvers = {
         
         // throw new AuthenticationError('You need to be logged in!')
       },
-      deleteMaterial: async(parent, { materialId }) => {
-        const deletedMaterial = await Material.findByOneAndUpdate(
-          {_id: materialId}
+      deleteMaterial: async(parent, args) => {
+        console.log(args)
+        const updateTicket = await Ticket.findOneAndUpdate(
+          {_id: args.ticketId},
+          {$pull: { materials: { _id: args.materialId}}},
+          { new: true } 
         )
-        console.log(_id)
-        return deletedMaterial;
+        console.log('material deleted')
+        return updateTicket;
       } 
     }
   };
