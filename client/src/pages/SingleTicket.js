@@ -7,7 +7,7 @@ import EditMaterialModal from '../components/EditMaterialModal';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_TICKET } from '../utils/queries';
-import { DELETE_MATERIAL } from '../utils/mutations';
+import { DELETE_MATERIAL, DELETE_TICKET } from '../utils/mutations';
 
 const customStyles = {
   content: {
@@ -26,16 +26,20 @@ Modal.setAppElement('#root');
 const SingleTicket = props => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  const [materialId, setMaterialId] = useState();
+  const [materialId, setMaterialId] = useState("");
   
   const { id: ticketId } = useParams();
   const { loading, data } = useQuery(QUERY_TICKET, {
     variables: { id: ticketId }
   });
+
+  const [deleteTicket] = useMutation(DELETE_TICKET, {
+    variables: {ticketId}
+  })
   
   const [deleteMaterial] = useMutation(DELETE_MATERIAL);
   const ticket = data?.ticket || {};
-  // const materialId = ticket.materials || {};
+  // const materialId = ticket.materials[0]._id || {};
   console.log('materialId', materialId)
   console.log('ticketId', ticketId)
   console.log(222, ticket)
@@ -43,19 +47,28 @@ const SingleTicket = props => {
     return <div>Loading...</div>;
   }
 
+  
+
+  const handleChange = async event => {
+    setMaterialId(event.target.value);
+    console.log('new material id', materialId)
+  }
+
   const handleDeleteMaterial = async event => {
     event.preventDefault();
-    setMaterialId(event.target.value)
+    // setMaterialId(event.target.value)
     console.log(111, materialId)
     try {
-      await deleteMaterial ({
-        variables: {ticketId, materialId }
-      })
+      await setMaterialId(event.target.value)
       console.log(555, materialId)
       console.log('delete ticket from client side')
     } catch (e) {
       console.log('errr')
       console.error(e)
+    } finally {
+      deleteMaterial ({
+        variables: {ticketId, materialId}
+      })
     }
   }
 
@@ -71,6 +84,7 @@ const SingleTicket = props => {
         <div className=" flex-row justify-space-between card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
             <h3> {ticket.clientName} </h3>
+            <button onClick={deleteTicket}> Delete Ticket </button>
           </span>{' '}
 
         </div>
@@ -99,7 +113,7 @@ const SingleTicket = props => {
                   </Modal>
                 </div>
                 <div className="pl-3">
-                  <button value={material._id} onClick= {handleDeleteMaterial} >Delete Material</button>
+                  <button type="text" value={material._id} onClick={handleDeleteMaterial} >Delete Material</button>
                 </div>
               </div>
             </div>

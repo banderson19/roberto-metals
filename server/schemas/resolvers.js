@@ -91,6 +91,12 @@ const resolvers = {
 
         // throw new AuthenticationError('You need to be logged in!')
       },
+      deleteTicket: async (parent, {ticketId} ) => {
+        const deleteTicket = await Ticket.deleteOne(
+          {_id: ticketId}
+        )
+        return deleteTicket
+      },
       addMaterial: async (parent, { ticketId, materialName, quantity }) => {
           const updatedTicket = await Ticket.findOneAndUpdate(
             { _id: ticketId },
