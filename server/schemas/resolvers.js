@@ -97,13 +97,13 @@ const resolvers = {
         )
         return deleteTicket
       },
-      addMaterial: async (parent, { ticketId, materialName, quantity }) => {
+      addMaterial: async (parent, {ticketId, materialName, quantity}) => {
           const updatedTicket = await Ticket.findOneAndUpdate(
             { _id: ticketId },
-            { $push: { materials: { materialName, quantity } } },
+            { $push: { materials: { materialName: materialName, quantity: quantity } } },
             { new: true, runValidators: true }
           );
-          console.log(materialName, quantity)
+          console.log(ticketId, materialName, quantity)
           return updatedTicket;
         
         // throw new AuthenticationError('You need to be logged in!')

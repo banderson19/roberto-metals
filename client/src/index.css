@@ -175,8 +175,8 @@ nav a:hover {
 }
 /* CARDS */
 .card {
-  margin: 20px;
-  border: 3px solid var(--dark);
+  margin: 5px;
+  border: 1px solid var(--dark);
   border-radius: var(--border-radius);
   background-color: var(--light);
   color: var(--dark);
@@ -194,6 +194,7 @@ nav a:hover {
 .card-body {
   padding: 2.5%;
   font-size: 1.4rem;
+  height: 400px;
 }
 
 /* FORM */
@@ -885,6 +886,10 @@ nav a:hover {
 
 .align-stretch {
   align-items: stretch;
+}
+
+.align-start {
+  align-items: flex-start;
 }
 
 .align-end {

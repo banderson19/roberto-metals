@@ -65,18 +65,19 @@ const TicketList = ( { tickets, title }) => {
             <div className="flex-row justify-center">
                 {tickets && 
                     tickets.map(ticket => (
-                        <div key={ticket._id} className = "card mb-3 col-4">
-                            <div  className="card-header">
-                                <h3>
-                                    <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light">
-                                        Client: {ticket.clientName}
-                                    </Link>
-                                    <br></br>
-                                </h3>
+                        <div key={ticket._id} className = "card mb-3">
+                            <div  className="card-header ">
+                                <div>
+                                    
+                                    <p className="pt-2 float-right">
+                                        {ticket.pickupDate}
+                                    </p>
+                                    {/* <Link to={`/profile/${ticket.clientName}`} style= {{ fontWeight: 700 }} className="text-light"> */}
+                                       <h4> Client: {ticket.clientName}</h4> 
+                                    {/* </Link> */}
+                                    
+                                </div>
 
-                                <h4>
-                                    Pickup Date: {ticket.pickupDate}
-                                </h4>
                                 <h6>
                                     <Link to={`/ticket/${ticket._id}`} style={{ fontWeight: 700 }} className="text-light">
                                         Ticket Number: {ticket._id}
@@ -86,9 +87,9 @@ const TicketList = ( { tickets, title }) => {
                             <div className="card-body">
                                 {  ticket.materials.map(material => (
                                     
-                                        <div key={material._id} className = "flex-row card mb-auto pl-2">
-                                            <p>Material: {material.materialName}</p>
-                                            <p>Weight: {material.quantity} lbs</p>
+                                        <div key={material._id} className = "flex-row justify-space-between card mb-auto pl-2">
+                                            <p>Metal: {material.materialName}</p>
+                                            <p> {material.quantity} lbs</p>
                                         </div>
                                     ))
                                 }

@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-// import ReactionList from '../components/ReactionList';
+import { Link } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import EditMaterialModal from '../components/EditMaterialModal';
+import AddMaterialModal from '../components/AddMaterialModal'
 
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_TICKET } from '../utils/queries';
+import { QUERY_TICKET , QUERY_TICKETS} from '../utils/queries';
 import { DELETE_MATERIAL, DELETE_TICKET } from '../utils/mutations';
 
 const customStyles = {
@@ -32,6 +33,7 @@ const SingleTicket = props => {
   const { loading, data } = useQuery(QUERY_TICKET, {
     variables: { id: ticketId }
   });
+
 
   const [deleteTicket] = useMutation(DELETE_TICKET, {
     variables: {ticketId}
@@ -84,7 +86,25 @@ const SingleTicket = props => {
         <div className=" flex-row justify-space-between card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
             <h3> {ticket.clientName} </h3>
-            <button onClick={deleteTicket}> Delete Ticket </button>
+              <button onClick={deleteTicket}> Delete Ticket </button>
+            
+            <div>
+              <button onClick={openModal}> Add Material </button>
+              <Modal
+                    isOpen={modalIsOpen}
+                    // onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div>
+                    <button onClick={closeModal}>close</button>
+
+                    <AddMaterialModal/>
+
+                    </div>
+                </Modal>
+            </div>
           </span>{' '}
 
         </div>
@@ -96,8 +116,8 @@ const SingleTicket = props => {
               <p>{material.quantity}</p>
               <div className="flex-row">
                 <div>
-                  <button onClick={openModal}>Edit</button>
-                  <Modal
+                  {/* <button onClick={openModal}>Edit</button> */}
+                  {/* <Modal
                     isOpen={modalIsOpen}
                     // onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
@@ -110,7 +130,7 @@ const SingleTicket = props => {
                       <EditMaterialModal />
 
                     </div>
-                  </Modal>
+                  </Modal> */}
                 </div>
                 <div className="pl-3">
                   <button type="text" value={material._id} onClick={handleDeleteMaterial} >Delete Material</button>
