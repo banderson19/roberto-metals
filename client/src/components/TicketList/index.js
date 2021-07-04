@@ -21,9 +21,9 @@ const TicketList = ( { tickets, title }) => {
     // let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
     
-    if (!tickets.length) {
-        return <h3> No tickets yet </h3>
-    }
+    // if (!tickets.length) {
+    //     return <h3> No tickets yet </h3>
+    // }
     console.log(1111, tickets)
 
 
