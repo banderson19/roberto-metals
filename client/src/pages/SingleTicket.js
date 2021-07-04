@@ -27,7 +27,7 @@ Modal.setAppElement('#root');
 const SingleTicket = props => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  const [materialId, setMaterialId] = useState("");
+  const [materialId, setMaterialId] = useState(0);
   
   const { id: ticketId } = useParams();
   const { loading, data } = useQuery(QUERY_TICKET, {
@@ -51,26 +51,24 @@ const SingleTicket = props => {
 
   
 
-  const handleChange = async event => {
-    setMaterialId(event.target.value);
-    console.log('new material id', materialId)
-  }
+  // const handleChange = async event => {
+  //   setMaterialId(event.target.value);
+  //   console.log('new material id', materialId)
+  // }
 
   const handleDeleteMaterial = async event => {
     event.preventDefault();
-    // setMaterialId(event.target.value)
+    setMaterialId(event.target.value)
     console.log(111, materialId)
     try {
-      await setMaterialId(event.target.value)
+      await deleteMaterial({
+          variables: {ticketId, materialId}
+      })
       console.log(555, materialId)
       console.log('delete ticket from client side')
     } catch (e) {
       console.log('errr')
       console.error(e)
-    } finally {
-      deleteMaterial ({
-        variables: {ticketId, materialId}
-      })
     }
   }
 
@@ -133,7 +131,7 @@ const SingleTicket = props => {
                   </Modal> */}
                 </div>
                 <div className="pl-3">
-                  <button type="text" value={material._id} onClick={handleDeleteMaterial} >Delete Material</button>
+                  <button value={material._id} onClick={handleDeleteMaterial} >Delete Material (double click)</button>
                 </div>
               </div>
             </div>

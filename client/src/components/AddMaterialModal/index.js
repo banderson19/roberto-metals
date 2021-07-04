@@ -26,9 +26,9 @@ const AddMaterialModal = () => {
         try {
             // add ticket to database
             await addMaterial ({
-                variables: { ticketId: ticketId, materialName: materialName, quantity: quantity}  
+                variables: { ticketId, materialName, quantity}  
             })
-            
+            console.log(ticketId, materialName, quantity)
         } catch (e) {
             console.log('ergg')
             console.error(e);
