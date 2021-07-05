@@ -20,9 +20,6 @@ This project was built to keep track of the metal that is purchased off clients.
 https://drive.google.com/file/d/1XePVfqSEuNGxiX8DB0YtT6nggH3Sxecd/view
 
 * npm run develop in the root directory
-```
-code blocks for commands
-```
 
 ## Authors
 
@@ -30,3 +27,7 @@ Bradford Anderson
 
 ## Deployment
 https://peaceful-biscayne-66305.herokuapp.com/
+
+```
+code blocks for commands
+```
