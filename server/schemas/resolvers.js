@@ -97,8 +97,8 @@ const resolvers = {
         )
         return deleteTicket
       },
-      addMaterial: async (parent, {args}) => {
-        console.log(args)
+      addMaterial: async (parent, {ticketId, materialName, quantity}) => {
+        // console.log(args)
           const updatedTicket = await Ticket.findOneAndUpdate(
             { _id: ticketId },
             { $push: { materials: { materialName: materialName, quantity: quantity } } },

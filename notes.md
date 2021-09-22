@@ -1,17 +1,15 @@
-* next step is customize profile
 
 ### Feature
 add material count on ticket
 
-### question for TA
-add a new input line in the form for more material to add
-
 ### To do
-* login and authentication - 21.2.3
-* Authorize Users with JWTs - 21.2.4 - .5
+* next step is customize profile
+
 
 ## BUGS to FIX
 * user password function(isCorrectPassword)
+* login and authentication - 21.2.3
+* Authorize Users with JWTs - 21.2.4 - .5
 
 
 
